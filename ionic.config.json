@@ -1,0 +1,7 @@
+{
+  "name": "BoxFlow",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
