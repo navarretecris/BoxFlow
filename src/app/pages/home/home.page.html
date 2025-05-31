@@ -1,0 +1,64 @@
+<ion-content class="home-background">
+  <ion-header translucent>
+    <ion-toolbar class="home-toolbar">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>BoxFlow</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="home-wrapper">
+    <div class="calendar-header">
+      <div class="month-title">mayo de 2025</div>
+      <ion-segment value="mes">
+        <ion-segment-button value="mes">Mes</ion-segment-button>
+        <ion-segment-button value="semana">Semana</ion-segment-button>
+        <ion-segment-button value="día">Día</ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <ion-card class="event-card">
+      <ion-item lines="none">
+        <ion-icon name="calendar-outline" slot="start" class="event-icon"></ion-icon>
+        <ion-label>
+          <h2>Yoga</h2>
+          <p>jueves 29-05-2025</p>
+        </ion-label>
+        <ion-note slot="end" color="success">0 / 10</ion-note>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label><strong>16:00</strong></ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <ion-footer>
+    <ion-tab-bar slot="bottom" class="home-tabs">
+      <ion-tab-button tab="horarios">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Horarios</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="reservas">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>Mis reservas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="resultados">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Resultados</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="cuenta">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>Mi cuenta</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
+</ion-content>

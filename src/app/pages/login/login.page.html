@@ -1,0 +1,56 @@
+<ion-content class="login-background">
+  <!-- Floating dust effect -->
+  <div class="dust"></div>
+
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+
+  <div class="login-wrapper">
+    <ion-card class="login-card">
+
+      <!-- ✅ Logo dentro de la tarjeta -->
+      <div class="logo-container">
+        <img src="assets/icon/logo2.png" alt="BoxFlow Logo" class="logo-image" />
+      </div>
+
+      <ion-card-header>
+        <ion-card-title class="title">Welcome Back</ion-card-title>
+        <ion-card-subtitle class="subtitle">
+          Train hard. Log in harder.
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (ngSubmit)="onLogin()">
+          <ion-item>
+            <ion-input
+              label="Username"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter your username"
+              [(ngModel)]="username"
+              name="username"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              type="password"
+              label="Password"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter your password"
+              [(ngModel)]="password"
+              name="password"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" class="login-button">
+            Sign In
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

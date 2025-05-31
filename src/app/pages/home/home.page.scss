@@ -1,0 +1,49 @@
+.home-background {
+  --background: transparent !important;
+  background: url('/assets/icon/crossfit.png') no-repeat center center / cover;
+  background-position: 45% 20%;
+  min-height: 100vh;
+}
+
+.home-wrapper {
+  padding: 16px;
+}
+
+.home-toolbar {
+  --background: #2f3640;
+  --color: #f5f6fa;
+}
+
+.month-title {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+ion-segment-button {
+  --background: #2f3640;
+  --color: #f5f6fa;
+  --indicator-color: #e84118;
+}
+
+.event-card {
+  background-color: rgba(47, 54, 64, 0.8);
+  color: #fff;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.event-icon {
+  color: #e84118;
+  font-size: 1.4rem;
+}
+
+.home-tabs {
+  --background: #1e272e;
+  --color-selected: #e84118;
+  --color: #cccccc;
+  font-weight: 500;
+}
