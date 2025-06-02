@@ -35,3 +35,14 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+@import 'theme/variables';
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Estilo de títulos principales */
+h1, h2, h3, .title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}

@@ -1,2 +1,38 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+:root {
+  /* Paleta de colores base */
+  --color-primary: #ff92ae;
+  --color-secondary: #ffd6e8;
+  --color-accent: #fef9ff;
+  --color-background: #ffffff;
+  --color-surface: #f8f8f8;
+  --color-text-dark: #2e2e2e;
+  --color-text-light: #999999;
+
+  /* Tipografía */
+  --font-primary: 'Nunito', sans-serif;
+  --font-titles: 'Poppins', sans-serif;
+
+  /* Botones */
+  --button-background: var(--color-primary);
+  --button-text: #ffffff;
+
+  /* Inputs */
+  --input-border: #eeeeee;
+  --input-focus: var(--color-secondary);
+
+  /* Sombra suave */
+  --box-shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Tema oscuro opcional */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #121212;
+    --color-surface: #1e1e1e;
+    --color-text-dark: #ffffff;
+    --color-text-light: #cccccc;
+
+    --button-background: #ff6f91;
+    --input-border: #333333;
+  }
+}

@@ -12,7 +12,8 @@ import {
   IonList,
   IonItem,
   NavController,
-  IonFooter
+  IonFooter,
+  MenuController
 } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -44,7 +45,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private authService: AuthService // ✅ Inyecta el servicio
+    private authService: AuthService, // ✅ Inyecta el servicio
+    private menuCtrl: MenuController // ✅ Inyecta el controlador de menú
   ) {}
 
   ngOnInit() {
@@ -57,6 +59,16 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.clearUser(); // ✅ Limpia desde el servicio también
     this.navCtrl.navigateRoot('/login');
+  }
+
+  goToHome() {
+    this.menuCtrl.close();
+    this.navCtrl.navigateForward('/home');
+  }
+
+  goToExercises() {
+    this.menuCtrl.close();
+    this.navCtrl.navigateForward('/exercises');
   }
 
 }

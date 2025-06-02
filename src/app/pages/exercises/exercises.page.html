@@ -1,0 +1,53 @@
+<ion-header translucent>
+  <ion-toolbar class="exercises-toolbar">
+     <!-- Botón para volver al home -->
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="volverHome()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ejercicios</ion-title>
+    <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="cargarArticulos()">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <!-- Refresher al halar hacia abajo -->
+  <ion-refresher slot="fixed" (ionRefresh)="refrescarArticulos($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Cargando -->
+  <div *ngIf="isLoading" class="ion-text-center ion-padding">
+    <ion-spinner name="dots"></ion-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <!-- Listado de productos -->
+  <div *ngIf="articulos.length > 0" class="market-grid">
+    <ion-card *ngFor="let articulo of articulos" (click)="verDetalleProducto(articulo.id_producto)" class="market-card">
+      
+      <ion-card-content>
+        <h2>{{ articulo.nombre }}</h2>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Infinite scroll -->
+  <ion-infinite-scroll (ionInfinite)="cargarMasArticulos($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="Cargando más...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Sin productos -->
+  <div *ngIf="articulos.length === 0 && !isLoading" class="ion-text-center ion-padding">
+    <ion-text color="medium">No hay productos disponibles</ion-text>
+  </div>
+</ion-content>
