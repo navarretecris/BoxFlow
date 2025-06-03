@@ -43,7 +43,7 @@ export class ExercisesService {
   }
 
   // Mètodo para obtener un producto por id
-  getProductById(id: number) {
+  getExerciseById(id: number) {
     return this.http.post(`${this.url}`, {
       accion: 'obtenerExercise',
       id: id

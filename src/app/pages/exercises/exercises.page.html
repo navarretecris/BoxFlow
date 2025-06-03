@@ -1,23 +1,23 @@
 <ion-header translucent>
   <ion-toolbar class="exercises-toolbar">
-     <!-- Botón para volver al home -->
     <ion-buttons slot="start">
       <ion-button fill="clear" (click)="volverHome()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-title>Ejercicios</ion-title>
+
     <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="cargarArticulos()">
-          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      <ion-button fill="clear" (click)="cargarArticulos()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <!-- Refresher al halar hacia abajo -->
+  <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refrescarArticulos($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -28,15 +28,29 @@
     <p>Cargando productos...</p>
   </div>
 
-  <!-- Listado de productos -->
-  <div *ngIf="articulos.length > 0" class="market-grid">
-    <ion-card *ngFor="let articulo of articulos" (click)="verDetalleProducto(articulo.id_producto)" class="market-card">
-      
-      <ion-card-content>
-        <h2>{{ articulo.nombre }}</h2>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <!-- Lista de productos -->
+ <ion-list *ngIf="articulos.length > 0">
+  <ion-item 
+    *ngFor="let articulo of articulos" 
+    lines="full" 
+    class="exercise-item">
+    
+    <ion-avatar slot="start">
+      <img [src]="articulo.imagen || 'assets/icon/image-not-available.png'" alt="Ejercicio" />
+    </ion-avatar>
+
+    <ion-label>
+      {{ articulo.nombre }}
+    </ion-label>
+
+    <ion-icon 
+      name="chevron-forward-outline" 
+      slot="end" 
+      class="icono-ir"
+      (click)="verDetalleExercise(articulo.id_exercise); $event.stopPropagation()">
+    </ion-icon>
+  </ion-item>
+</ion-list>
 
   <!-- Infinite scroll -->
   <ion-infinite-scroll (ionInfinite)="cargarMasArticulos($event)">

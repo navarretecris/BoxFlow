@@ -2,3 +2,28 @@
   --background: #2f3640;
   --color: #f5f6fa;
 }
+
+ion-item {
+  --min-height: 72px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;
+
+  ion-label h2 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  ion-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.icono-ir {
+  cursor: pointer;
+}

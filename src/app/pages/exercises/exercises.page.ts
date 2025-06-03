@@ -1,4 +1,5 @@
-import { NavController, IonBackButton } from '@ionic/angular/standalone';
+
+import { NavController, IonBackButton, IonAvatar } from '@ionic/angular/standalone';
 // Importaciones necesarias de Angular e Ionic
 import { Component, OnInit } from '@angular/core';
 import { ExercisesService } from 'src/app/services/exercises.service';
@@ -14,7 +15,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton,
   templateUrl: './exercises.page.html',
   styleUrls: ['./exercises.page.scss'],
   standalone: true,
-  imports: [IonBackButton,  // Todos los componentes/directivas que necesita este componente
+  imports: [IonAvatar, IonBackButton,  // Todos los componentes/directivas que necesita este componente
     IonIcon, IonContent, IonHeader, IonTitle, IonToolbar,
     CommonModule, FormsModule, IonButton, IonButtons, IonRefresher,
     IonRefresherContent, IonSpinner, IonText, IonItem, IonLabel,
@@ -131,9 +132,9 @@ export class ExercisesPage implements OnInit {
 
 
 
-  verDetalleProducto(id: number) {
+  verDetalleExercise(id: number) {
 
-    this.navCtrl.navigateForward(`/product-detail/${id}`, {
+    this.navCtrl.navigateForward(`/exercise-detail/${id}`, {
       animationDirection: 'forward'
     }); // Navegación optimizada para Ionic
 
