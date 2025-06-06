@@ -66,5 +66,12 @@ eliminar(id: number) {
   return this.http.post(`${this.url}`, { accion: 'baja', codigo: id });
 }
 
+buscarEjercicios(termino: string) {
+  return this.http.post(`${this.url}`, {
+    accion: 'buscar',
+    termino: termino
+  });
+}
+
 
 }

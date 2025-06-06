@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton,
   IonButtons, IonRefresher, IonRefresherContent, IonIcon,
   IonSpinner, IonText, IonItem, IonLabel, IonList, IonThumbnail,
-  IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFabButton } from '@ionic/angular/standalone';
+  IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFabButton, IonSearchbar } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-exercises',
@@ -18,136 +18,86 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton,
     IonIcon, IonContent, IonHeader, IonTitle, IonToolbar,
     CommonModule, FormsModule, IonButton, IonButtons, IonRefresher,
     IonRefresherContent, IonSpinner, IonText, IonItem, IonLabel,
-    IonList, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFab, IonFabButton]
+    IonList, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFab, IonFabButton, IonSearchbar ]
 })
 export class ExercisesPage implements OnInit {
- // Propiedades de la clase:
-
-  // Array para almacenar los artículos/ejercicios
-  articulos: any[] = [];
-
-  // Flag para indicar si está cargando datos iniciales
+articulos: any[] = [];
+  articulosFiltrados: any[] = [];
   isLoading = false;
+  searchTerm = '';
 
-  // Flag para indicar si está cargando más datos (paginación)
-  isLoadingMore = false;
-
-  // Mensaje de error para mostrar al usuario
-  errorMessage = '';
-
-  // Flag para controlar si hay más datos por cargar
-  hasMoreData = true;
-
-  // Constructor: inyecta el ejercicio exercisesService
-  constructor(private exerciseService: ExercisesService, private navCtrl: NavController) { }
-
-  // Metodo del ciclo de vida: se ejecuta al inicializar el componente
+  constructor(
+    private exercisesService: ExercisesService,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
-    this.cargarArticulos(); // Carga los artículos al inicializar el componente
+    this.cargarArticulos();
   }
 
-
-  /**
-   * Método para cargar los artículos iniciales
-   * - Reinicia los estados de carga
-   * - Hace la petición al servicio
-   * - Maneja la respuesta y los errores
-   */
   cargarArticulos() {
-    this.isLoading = true; // Activa flag de carga
-    this.errorMessage = ''; // Limpia mensajes de error previos
-    this.articulos = []; // Vacía el array de artículos
-    this.hasMoreData = true; // Asume que hay más datos por cargar
-
-    // Llama al servicio para obtener los artículos
-    this.exerciseService.recuperarTodos().subscribe({
-      next: (result: any) => {
-        // Si la respuesta es un array, lo asigna, sino array vacío
-        this.articulos = Array.isArray(result) ? result : [];
-        this.isLoading = false; // Desactiva flag de carga
-
-        // Determina si hay más datos (si la respuesta no está vacía)
-        this.hasMoreData = result.length > 0;
+    this.isLoading = true;
+    this.exercisesService.recuperarTodos().subscribe({
+      next: (res: any) => {
+        this.articulos = res;
+        this.filtrarEjercicios();
+        this.isLoading = false;
       },
-      error: (error) => {
-        this.errorMessage = 'Error al cargar los productos'; // Mensaje de error
-        this.isLoading = false; // Desactiva flag de carga
-        console.error("Error al recuperar los datos", error); // Log del error
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
       }
     });
   }
 
-  /**
-   * Método para cargar más artículos (paginación)
-   * @param event Evento del infinite-scroll
-   */
-  cargarMasArticulos(event: any) {
-    // Si no hay más datos, deshabilita el infinite-scroll y retorna
-    if (!this.hasMoreData) {
-      event.target.disabled = true;
-      return;
-    }
-
-    this.isLoadingMore = true; // Activa flag de carga adicional
-
-    // Llama al servicio para cargar más artículos
-    this.exerciseService.loadMore().subscribe({
-      next: (result: any) => {
-        // Procesa los nuevos artículos
-        const nuevosArticulos = Array.isArray(result) ? result : [];
-
-        // Concatena los nuevos artículos con los existentes
-        this.articulos = [...this.articulos, ...nuevosArticulos];
-
-        // Determina si hay más datos por cargar
-        this.hasMoreData = nuevosArticulos.length > 0;
-        this.isLoadingMore = false; // Desactiva flag de carga
-
-        // Completa el evento del infinite-scroll
-        event.target.complete();
-
-        // Si no hay más datos, deshabilita el infinite-scroll
-        if (!this.hasMoreData) {
-          event.target.disabled = true;
-        }
-      },
-      error: (error) => {
-        console.error("Error al cargar más artículos", error);
-        this.isLoadingMore = false; // Desactiva flag de carga
-        event.target.complete(); // Completa el evento aunque haya error
-      }
-    });
-  }
-
-  /**
-   * Método para refrescar/recargar los artículos
-   * @param event Evento del ion-refresher
-   */
   refrescarArticulos(event: any) {
-    this.cargarArticulos(); // Vuelve a cargar los artículos
-    event.target.complete(); // Completa el evento de refresco
+    this.cargarArticulos();
+    event.target.complete();
   }
 
+  cargarMasArticulos(event: any) {
+    this.exercisesService.loadMore().subscribe({
+      next: (res: any) => {
+        this.articulos = [...this.articulos, ...res];
+        this.filtrarEjercicios();
+        event.target.complete();
+      },
+      error: (err) => {
+        console.error(err);
+        event.target.complete();
+      }
+    });
+  }
 
+  crearNuevoEjercicio() {
+    this.navCtrl.navigateForward('/exercise-form');
+  }
 
   verDetalleExercise(id: number) {
-
-    this.navCtrl.navigateForward(`/exercise-detail/${id}`, {
-      animationDirection: 'forward'
-    }); // Navegación optimizada para Ionic
-
-
+    this.navCtrl.navigateForward(`/exercise-detail/${id}`);
   }
 
   volverHome() {
-  this.navCtrl.navigateRoot('/home');
+    this.navCtrl.navigateRoot('/home');
+  }
+
+  filtrarEjercicios() {
+  const termino = this.searchTerm.trim();
+
+  if (termino.length > 0) {
+    this.isLoading = true;
+    this.exercisesService.buscarEjercicios(termino).subscribe({
+      next: (res: any) => {
+        this.articulosFiltrados = res;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
+      }
+    });
+  } else {
+    this.articulosFiltrados = this.articulos; // Restablece la lista
+  }
 }
-
-crearNuevoEjercicio() {
-  console.log('Redirigiendo al formulario...');
-  this.navCtrl.navigateForward('/exercise-form');
-}
-
-
 }

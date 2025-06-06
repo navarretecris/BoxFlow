@@ -31,3 +31,19 @@ ion-item {
 ion-content {
   --padding-bottom: 100px;
 }
+
+ion-searchbar {
+  padding: 10px;
+  --background: #2f3640;
+  --color: #f5f6fa;
+  --placeholder-color: #888;
+  --icon-color: #f5f6fa;
+}
+
+ion-list {
+  margin-bottom: 70px; // para evitar que el botón flotante tape el último ítem
+}
+
+ion-fab {
+  z-index: 10;
+}
