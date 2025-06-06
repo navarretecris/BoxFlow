@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Ejercicios</ion-title>
+    <ion-title class="ion-text-center">Ejercicios</ion-title>
 
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="cargarArticulos()">
@@ -16,59 +16,45 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Botón flotante para crear nuevo ejercicio -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button color="success" (click)="crearNuevoEjercicio()">
     <ion-icon name="add-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
-<ion-content>
-
-  <!-- Searchbar -->
+<ion-content class="exercises-content ion-padding">
   <ion-searchbar
     [(ngModel)]="searchTerm"
     (ionInput)="filtrarEjercicios()"
     placeholder="Buscar ejercicio"
-    color="dark">
+    color="dark"
+    class="custom-searchbar">
   </ion-searchbar>
 
-  <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refrescarArticulos($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!-- Cargando -->
-  <div *ngIf="isLoading" class="ion-text-center ion-padding">
-    <ion-spinner name="dots"></ion-spinner>
-    <p>Cargando ejercicios...</p>
-  </div>
+  <div *ngIf="isLoading" class="custom-loader">
+  <ion-spinner name="crescent" color="light"></ion-spinner>
+  <p>Cargando ejercicios...</p>
+</div>
 
-  <!-- Lista -->
-  <ion-list *ngIf="articulosFiltrados.length > 0">
-    <ion-item 
-      *ngFor="let articulo of articulosFiltrados" 
-      lines="full" 
-      class="exercise-item">
-
-      <ion-avatar slot="start">
-        <img [src]="articulo.imagen || 'assets/icon/image-not-available.png'" alt="Ejercicio" />
-      </ion-avatar>
-
+<ion-list *ngIf="articulosFiltrados.length > 0" class="exercise-list" [@listStagger]>
+  <ion-card *ngFor="let articulo of articulosFiltrados" class="exercise-card">
+    <ion-item lines="none" (click)="verDetalleExercise(articulo.id_exercise)">
       <ion-label>
-        {{ articulo.nombre }}
+        <h2>{{ articulo.nombre }}</h2>
+        <p>Categoría: {{ articulo.nombre_categoria || 'N/A' }}</p>
+        <p>Tipo: {{ articulo.nombre_tipo || 'N/A' }}</p>
       </ion-label>
-
-      <ion-icon 
-        name="chevron-forward-outline" 
-        slot="end" 
-        class="icono-ir"
-        (click)="verDetalleExercise(articulo.id_exercise); $event.stopPropagation()">
-      </ion-icon>
+      <ion-avatar slot="start" [ngClass]="articulo.video ? 'video-icon-active' : 'video-icon-inactive'">
+  <ion-icon name="videocam-outline"></ion-icon>
+</ion-avatar>
     </ion-item>
-  </ion-list>
+  </ion-card>
+</ion-list>
 
-  <!-- Infinite scroll -->
   <ion-infinite-scroll (ionInfinite)="cargarMasArticulos($event)">
     <ion-infinite-scroll-content
       loadingSpinner="dots"
@@ -76,7 +62,6 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <!-- Sin resultados -->
   <div *ngIf="!isLoading && articulosFiltrados.length === 0" class="ion-text-center ion-padding">
     <ion-text color="medium">No hay ejercicios encontrados</ion-text>
   </div>

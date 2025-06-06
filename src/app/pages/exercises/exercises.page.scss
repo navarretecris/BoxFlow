@@ -1,49 +1,101 @@
+ion-content {
+  --background: #121212;
+  color: #f5f6fa;
+  padding: 12px;
+}
+
 .exercises-toolbar {
   --background: #2f3640;
   --color: #f5f6fa;
+  text-align: center;
 }
 
-ion-item {
-  --min-height: 72px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  font-size: 16px;
-
-  ion-label h2 {
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-  ion-avatar {
-    width: 48px;
-    height: 48px;
-  }
-
-  ion-icon {
-    font-size: 20px;
-  }
-}
-
-.icono-ir {
-  cursor: pointer;
-}
-
-ion-content {
-  --padding-bottom: 100px;
+ion-title {
+  text-align: center;
 }
 
 ion-searchbar {
-  padding: 10px;
+  margin-bottom: 12px;
   --background: #2f3640;
   --color: #f5f6fa;
-  --placeholder-color: #888;
+  --placeholder-color: #aaa;
   --icon-color: #f5f6fa;
-}
-
-ion-list {
-  margin-bottom: 70px; // para evitar que el botón flotante tape el último ítem
+  border-radius: 10px;
+  padding: 0 12px;
 }
 
 ion-fab {
   z-index: 10;
+  bottom: 24px;
+  right: 24px;
+}
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exercise-card {
+  --background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease-in-out;
+}
+
+.exercise-card:hover {
+  transform: scale(1.015);
+}
+
+.exercise-avatar img {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #f5f6fa;
+}
+
+ion-label h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f5f6fa;
+  margin-bottom: 4px;
+}
+
+ion-label p {
+  font-size: 14px;
+  color: #a4b0be;
+  margin: 0;
+}
+.custom-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  color: #f5f6fa;
+  font-size: 16px;
+}
+
+
+ion-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 24px;
+  color: white;
+  width: 48px;
+  height: 48px;
+}
+
+.video-icon-active {
+  background-color: #00cec9; // azul turquesa para ejercicios con video
+}
+
+.video-icon-inactive {
+  background-color: #636e72; // gris oscuro para ejercicios sin video
 }

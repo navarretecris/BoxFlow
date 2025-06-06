@@ -1,11 +1,13 @@
 <ion-header translucent>
-   <ion-toolbar class="exercises-toolbar">
+  <ion-toolbar class="exercises-toolbar">
     <ion-buttons slot="start">
       <ion-button fill="clear" (click)="volverExercise()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ isEditing ? 'Editar Ejercicio' : 'Nuevo Ejercicio' }}</ion-title>
+    <ion-title
+      >{{ isEditing ? 'Editar Ejercicio' : 'Nuevo Ejercicio' }}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -13,35 +15,57 @@
   <form (ngSubmit)="guardarEjercicio()" #exerciseForm="ngForm">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="exercise.nombre" name="nombre" type="text" required></ion-input>
+      <ion-input
+        [(ngModel)]="exercise.nombre"
+        name="nombre"
+        type="text"
+        required
+      ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Observación</ion-label>
-      <ion-textarea [(ngModel)]="exercise.observacion" name="observacion" required></ion-textarea>
+      <ion-textarea
+        [(ngModel)]="exercise.observacion"
+        name="observacion"
+        required
+      ></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Imagen (URL)</ion-label>
-      <ion-input [(ngModel)]="exercise.imagen" name="imagen" type="text" required></ion-input>
+      <ion-input
+        [(ngModel)]="exercise.imagen"
+        name="imagen"
+        type="text"
+        required
+      ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Video (URL)</ion-label>
-      <ion-input [(ngModel)]="exercise.video" name="video" type="text"></ion-input>
+      <ion-input
+        [(ngModel)]="exercise.video"
+        name="video"
+        type="text"
+      ></ion-input>
     </ion-item>
 
     <ion-item>
-  <ion-label position="floating">ID Categoría</ion-label>
+  <ion-label position="floating">Categoría</ion-label>
   <ion-select [(ngModel)]="exercise.id_categoria" name="id_categoria" required interface="popover">
-    <ion-select-option *ngFor="let c of categorias" [value]="c">{{ c }}</ion-select-option>
+    <ion-select-option *ngFor="let c of categorias" [value]="c.id_categoria">
+      {{ c.nombre }}
+    </ion-select-option>
   </ion-select>
 </ion-item>
 
 <ion-item>
-  <ion-label position="floating">ID Tipo</ion-label>
+  <ion-label position="floating">Tipo</ion-label>
   <ion-select [(ngModel)]="exercise.id_tipo" name="id_tipo" required interface="popover">
-    <ion-select-option *ngFor="let t of tipos" [value]="t">{{ t }}</ion-select-option>
+    <ion-select-option *ngFor="let t of tipos" [value]="t.id_tipo">
+      {{ t.nombre }}
+    </ion-select-option>
   </ion-select>
 </ion-item>
 

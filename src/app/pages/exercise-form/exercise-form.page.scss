@@ -24,3 +24,18 @@ ion-input, ion-textarea, ion-select {
   --background: #2f3640;
   --color: #f5f6fa;
 }
+/* Estilos para el alert del ion-select */
+.alert-wrapper {
+  --background: #1e1e1e !important;
+}
+
+.alert-title,
+.alert-sub-title,
+.alert-radio-label,
+.alert-checkbox-label {
+  color: white !important;
+}
+
+.alert-button {
+  color: #00ff90 !important;
+}

@@ -72,6 +72,12 @@ buscarEjercicios(termino: string) {
     termino: termino
   });
 }
+obtenerCategorias() {
+  return this.http.post(`${this.url}`,  { accion: 'listarCategorias' });
+}
 
+obtenerTipos() {
+  return this.http.post(`${this.url}`, { accion: 'listarTipos' });
+}
 
 }

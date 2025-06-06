@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular/standalone';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AlertController, ToastController } from '@ionic/angular/standalone';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
   IonButtons, IonThumbnail, IonLabel, IonItem, IonList, IonIcon,
   IonText, IonGrid, IonRow, IonCol, IonButton ,IonFab, IonFabButton, IonSpinner } from '@ionic/angular/standalone';
@@ -30,7 +31,9 @@ export class ExerciseDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private exercisesService: ExercisesService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private toastController: ToastController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -63,19 +66,44 @@ editarExercise() {
   this.navCtrl.navigateForward(`/exercise-form/${this.exercise.id_exercise}`);
 }
 
-eliminarExercise() {
-  if (confirm('¿Estás seguro de eliminar este ejercicio?')) {
-    this.exercisesService.eliminar(this.exercise.id_exercise).subscribe({
-      next: () => {
-        alert('Ejercicio eliminado');
-        this.navCtrl.navigateRoot('/exercises');
+async eliminarExercise() {
+  const alert = await this.alertController.create({
+    header: 'Confirmar eliminación',
+    message: '¿Estás seguro de eliminar este ejercicio?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
       },
-      error: (error) => {
-        console.error(error);
-        alert('Error al eliminar el ejercicio');
-      }
-    });
-  }
+      {
+        text: 'Eliminar',
+        handler: () => {
+          this.exercisesService.eliminar(this.exercise.id_exercise).subscribe({
+            next: () => {
+              this.mostrarToast('Ejercicio eliminado correctamente', 'success');
+              this.navCtrl.navigateRoot('/exercises');
+            },
+            error: (error) => {
+              console.error(error);
+              this.mostrarToast('Error al eliminar el ejercicio', 'danger');
+            }
+          });
+        },
+      },
+    ],
+  });
+
+  await alert.present();
+}
+
+async mostrarToast(mensaje: string, color: string = 'success') {
+  const toast = await this.toastController.create({
+    message: mensaje,
+    duration: 2000,
+    position: 'bottom',
+    color: color
+  });
+  await toast.present();
 }
 
 }
