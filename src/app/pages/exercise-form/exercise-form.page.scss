@@ -1,0 +1,26 @@
+ion-content {
+  --background: #121212;
+  color: #f5f6fa;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #f5f6fa;
+  border-bottom: 1px solid #2f3640;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+ion-label {
+  color: #a4b0be;
+  font-size: 14px;
+}
+
+ion-input, ion-textarea, ion-select {
+  color: #ffffff;
+}
+
+.exercises-toolbar {
+  --background: #2f3640;
+  --color: #f5f6fa;
+}

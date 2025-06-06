@@ -1,5 +1,4 @@
-
-import { NavController, IonBackButton, IonAvatar } from '@ionic/angular/standalone';
+import { NavController, IonBackButton, IonAvatar, IonFab } from '@ionic/angular/standalone';
 // Importaciones necesarias de Angular e Ionic
 import { Component, OnInit } from '@angular/core';
 import { ExercisesService } from 'src/app/services/exercises.service';
@@ -8,18 +7,18 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton,
   IonButtons, IonRefresher, IonRefresherContent, IonIcon,
   IonSpinner, IonText, IonItem, IonLabel, IonList, IonThumbnail,
-  IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton } from '@ionic/angular/standalone';
+  IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFabButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-exercises',
   templateUrl: './exercises.page.html',
   styleUrls: ['./exercises.page.scss'],
   standalone: true,
-  imports: [IonAvatar, IonBackButton,  // Todos los componentes/directivas que necesita este componente
+  imports: [IonFab, IonAvatar, IonBackButton,  // Todos los componentes/directivas que necesita este componente
     IonIcon, IonContent, IonHeader, IonTitle, IonToolbar,
     CommonModule, FormsModule, IonButton, IonButtons, IonRefresher,
     IonRefresherContent, IonSpinner, IonText, IonItem, IonLabel,
-    IonList, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton]
+    IonList, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonCard, IonCardContent, IonMenuButton, IonFab, IonFabButton]
 })
 export class ExercisesPage implements OnInit {
  // Propiedades de la clase:
@@ -144,5 +143,11 @@ export class ExercisesPage implements OnInit {
   volverHome() {
   this.navCtrl.navigateRoot('/home');
 }
+
+crearNuevoEjercicio() {
+  console.log('Redirigiendo al formulario...');
+  this.navCtrl.navigateForward('/exercise-form');
+}
+
 
 }

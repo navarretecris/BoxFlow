@@ -50,6 +50,21 @@ export class ExercisesService {
     });
   }
 
+agregar(payload: any) {
+  return this.http.post(`${this.url}`, payload);
+}
+
+actualizar(exercise: any) {
+  return this.http.post(`${this.url}`, {
+    accion: 'modificacion',
+    codigo: exercise.id_exercise,
+    ...exercise,
+  });
+}
+
+eliminar(id: number) {
+  return this.http.post(`${this.url}`, { accion: 'baja', codigo: id });
+}
 
 
 }

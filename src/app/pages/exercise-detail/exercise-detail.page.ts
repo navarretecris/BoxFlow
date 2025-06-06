@@ -59,4 +59,23 @@ export class ExerciseDetailPage implements OnInit {
   this.navCtrl.navigateRoot('/exercises'); // Navega a la página de ejercicios
 }
 
+editarExercise() {
+  this.navCtrl.navigateForward(`/exercise-form/${this.exercise.id_exercise}`);
+}
+
+eliminarExercise() {
+  if (confirm('¿Estás seguro de eliminar este ejercicio?')) {
+    this.exercisesService.eliminar(this.exercise.id_exercise).subscribe({
+      next: () => {
+        alert('Ejercicio eliminado');
+        this.navCtrl.navigateRoot('/exercises');
+      },
+      error: (error) => {
+        console.error(error);
+        alert('Error al eliminar el ejercicio');
+      }
+    });
+  }
+}
+
 }

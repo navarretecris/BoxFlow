@@ -16,6 +16,13 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Botón flotante para crear nuevo ejercicio -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="success" (click)="crearNuevoEjercicio()">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
 <ion-content>
   <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refrescarArticulos($event)">
