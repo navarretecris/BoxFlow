@@ -1,0 +1,55 @@
+.dark-form-content {
+  --background: #121212;
+  color: #f5f6fa;
+}
+
+.exercises-toolbar {
+  --background: #2f3640;
+  --color: #f5f6fa;
+}
+
+.formulario {
+  margin-bottom: 20px;
+}
+
+.form-item {
+  --background: #1e1e1e;
+  --color: #f5f6fa;
+  border-radius: 10px;
+}
+
+ion-label,
+ion-input {
+  color: #f5f6fa;
+}
+
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.class-card {
+  --background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 4px;
+}
+
+ion-card ion-item {
+  --background: transparent;
+  --color: #f5f6fa;
+}
+
+ion-label h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f5f6fa;
+  margin: 4px 0;
+}
+
+ion-icon {
+  font-size: 20px;
+  color: #f5f6fa !important;
+  font-size: 22px;
+}

@@ -1,0 +1,113 @@
+/* ===== Estilos oscuros coherentes con exercises.page.scss ===== */
+
+ion-content.scheduled-page {
+  --background: #121212;
+  color: #f5f6fa;
+  padding: 12px;
+}
+
+.scheduled-toolbar {
+  --background: #2f3640;
+  --color: #f5f6fa;
+  text-align: center;
+}
+
+ion-title {
+  text-align: center;
+}
+
+.scheduled-button {
+  margin-top: 12px;
+  --background: #2f3640;
+  --color: #f5f6fa;
+  font-weight: bold;
+}
+
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.class-card {
+  --background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease-in-out;
+}
+
+.class-card:hover {
+  transform: scale(1.015);
+}
+
+ion-item {
+  --background: transparent;
+  --color: #f5f6fa;
+}
+
+ion-label h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f5f6fa;
+  margin-bottom: 4px;
+}
+
+ion-label p {
+  font-size: 14px;
+  color: #a4b0be;
+  margin: 0;
+}
+
+ion-text {
+  color: #a4b0be;
+}
+
+/* Estilo general para el modal oscuro */
+ion-modal::part(content) {
+  --background: #1e1e1e;
+  border-radius: 16px;
+  padding: 16px;
+  color: #f5f6fa;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Encabezado del modal */
+ion-modal ion-toolbar {
+  --background: #2f3640;
+  --color: #f5f6fa;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Estilo de los inputs y selects dentro del modal */
+ion-modal form ion-item {
+  --background: #2f3640;
+  --color: #f5f6fa;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Estilo del ion-datetime dentro del modal */
+ion-modal ion-datetime {
+  --background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Botones del formulario del modal */
+ion-modal form ion-button {
+  margin-top: 12px;
+}
+
+/* Separación entre botones */
+ion-modal form ion-button + ion-button {
+  margin-top: 8px;
+}
+
+.time-picker-button {
+  --background: #2f3640;
+  --color: #f5f6fa;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+}

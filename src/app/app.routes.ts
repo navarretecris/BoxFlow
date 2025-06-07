@@ -44,4 +44,14 @@ export const routes: Routes = [
         (m) => m.ExerciseFormPage
       ),
   },
+  
+  {
+    path: 'clases',
+    loadComponent: () => import('./pages/clases/clases.page').then( m => m.ClasesPage)
+  },
+  {
+    path: 'scheduled-classes',
+    loadComponent: () => import('./pages/scheduled-classes/scheduled-classes.page').then( m => m.ScheduledClassesPage)
+  },
+  
 ];

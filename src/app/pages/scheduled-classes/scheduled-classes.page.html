@@ -1,0 +1,119 @@
+<ion-header translucent>
+  <ion-toolbar class="scheduled-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="volverHome()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Clases Programadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding dark-form-content scheduled-page">
+
+  <!-- Botón para abrir el modal -->
+<ion-button expand="block" color="primary" (click)="abrirModal()" class="scheduled-button">Agregar Clase</ion-button>
+
+  <!-- Lista de clases programadas -->
+  <ion-list class="class-list" *ngIf="clases && clases.length > 0">
+    <ion-card *ngFor="let c of clases" class="class-card">
+      <ion-item lines="none">
+        <ion-label>
+          <h2>{{ c.nombre_tipo }}</h2>
+          <p>{{ c.dia_semana }} - {{ c.hora }}</p>
+          <p>Cupo: {{ c.cupo_maximo }} / Duración: {{ c.duracion }} min</p>
+          <p>Instructor: {{ c.nombre_instructor || 'No asignado' }}</p>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" color="light" (click)="edit(c)">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="danger" (click)="eliminar(c)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-text color="medium" *ngIf="clases && clases.length === 0" class="ion-text-center ion-margin-top">
+    No hay clases programadas.
+  </ion-text>
+
+  <!-- Modal con el formulario -->
+  <ion-modal class="custom-modal" [isOpen]="mostrarModal" (didDismiss)="cancel()" backdropDismiss="false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="dark">
+          <ion-title>{{ isEditing ? 'Editar Clase' : 'Nueva Clase' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="dark-form-content ion-padding">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="formulario">
+          <ion-item>
+            <ion-label position="floating">Tipo de Clase</ion-label>
+            <ion-select formControlName="id_class_type">
+              <ion-select-option *ngFor="let tipo of tiposClase" [value]="tipo.id_class_type">{{ tipo.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Día de la Semana</ion-label>
+            <ion-select formControlName="dia_semana">
+              <ion-select-option *ngFor="let dia of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']" [value]="dia">{{ dia }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item button detail (click)="abrirSelectorHora()">
+  <ion-label>
+    Hora
+  </ion-label>
+  <ion-note slot="end">{{ form.get('hora')?.value || 'Seleccionar' }}</ion-note>
+</ion-item>
+
+<ion-modal [isOpen]="mostrarSelectorHora" (didDismiss)="cerrarSelectorHora()">
+  <ng-template>
+    <ion-content class="ion-padding dark-form-content">
+      <ion-datetime
+        [value]="form.get('hora')?.value"
+        (ionChange)="onHoraChange($event)"
+        presentation="time"
+        hour-cycle="h23"
+        minute-values="0,30"
+        show-default-buttons="true"
+        prefer-wheel="true"
+      ></ion-datetime>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+          <ion-item>
+            <ion-label position="floating">Cupo Máximo</ion-label>
+            <ion-input type="number" formControlName="cupo_maximo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Duración (min)</ion-label>
+            <ion-input type="number" formControlName="duracion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Instructor</ion-label>
+            <ion-select formControlName="id_instructor">
+              <ion-select-option *ngFor="let i of instructores" [value]="i.id_instructor">{{ i.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [color]="isEditing ? 'warning' : 'primary'" [disabled]="form.invalid">
+            {{ isEditing ? 'Actualizar' : 'Agregar' }}
+          </ion-button>
+
+          <ion-button expand="block" color="medium" type="button" (click)="cancel()">Cancelar</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

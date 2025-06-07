@@ -1,0 +1,63 @@
+<ion-header translucent>
+  <ion-toolbar class="exercises-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="volverHome()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Gestión de Clases</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding dark-form-content">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="formulario">
+    <ion-item lines="inset" class="form-item">
+      <ion-label position="floating">Nombre de la Clase</ion-label>
+      <ion-input formControlName="nombre" color="light"></ion-input>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      fill="solid"
+      [color]="isEditing ? 'warning' : 'primary'"
+      type="submit"
+      class="ion-margin-bottom"
+      [disabled]="form.invalid">
+      {{ isEditing ? 'Actualizar' : 'Agregar' }}
+    </ion-button>
+
+    <ion-button
+      *ngIf="isEditing"
+      expand="block"
+      color="medium"
+      type="button"
+      (click)="cancel()">
+      Cancelar
+    </ion-button>
+  </form>
+
+  <ion-text color="medium" *ngIf="types.length === 0" class="ion-text-center ion-margin-top">
+    No hay clases registradas.
+  </ion-text>
+
+  <ion-list class="class-list" *ngIf="types.length > 0">
+    <ion-card *ngFor="let t of types" class="class-card">
+      <ion-item lines="none">
+        <ion-label>
+          <h2>{{ t.nombre }}</h2>
+        </ion-label>
+
+        <ion-buttons slot="end">
+          <ion-button fill="clear" color="light" (click)="edit(t)">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="danger" (click)="delete(t)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>

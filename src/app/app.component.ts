@@ -13,7 +13,8 @@ import {
   IonItem,
   NavController,
   IonFooter,
-  MenuController
+  MenuController,
+  IonItemDivider
 } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -37,7 +38,8 @@ import { AuthService } from './services/auth.service'; // ✅ Importa tu servici
     IonContent,
     IonList,
     IonItem,
-    IonFooter
+    IonFooter,
+    IonItemDivider
   ],
 })
 export class AppComponent implements OnInit {
@@ -69,6 +71,16 @@ export class AppComponent implements OnInit {
   goToExercises() {
     this.menuCtrl.close();
     this.navCtrl.navigateForward('/exercises');
+  }
+
+   goToClasses() {
+    this.menuCtrl.close();
+    this.navCtrl.navigateForward('/clases');
+  }
+
+   goToSchedule() {
+    this.menuCtrl.close();
+    this.navCtrl.navigateForward('/scheduled-classes'); 
   }
 
 }
