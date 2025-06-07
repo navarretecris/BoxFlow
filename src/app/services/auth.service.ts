@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  url = 'http://localhost/plataformasDesarrollo/BackEnd/crud.php';
+  url = 'http://localhost/BoxFlow/BackEnd/crud.php';
   currentUser = new BehaviorSubject<any>(null);
   
 

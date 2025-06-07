@@ -47,3 +47,25 @@ ion-segment-button {
   --color: #cccccc;
   font-weight: 500;
 }
+
+.logo-toolbar {
+  --min-height: 44px; // mantiene altura estándar
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-img-centered {
+  height: 30px;
+  max-height: 100%;
+  transform: scale(3);
+ 
+
+}

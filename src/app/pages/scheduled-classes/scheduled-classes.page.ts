@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular/standalone';
 import {
   ScheduledClassesService,
   ScheduledClass,
@@ -84,7 +85,8 @@ export class ScheduledClassesPage implements OnInit {
     private clasesService: ClasesService,
     private http: HttpClient,
     private navCtrl: NavController,
-    private instructorsService: InstructorsService
+    private instructorsService: InstructorsService,
+    private toastCtrl: ToastController
   ) {
     this.form = this.fb.group({
       id_class: [null],
@@ -115,36 +117,43 @@ export class ScheduledClassesPage implements OnInit {
   }
 
   eliminar(clase: ScheduledClass) {
-    this.alertCtrl
-      .create({
-        header: 'Confirmar',
-        message: `¿Eliminar clase del ${clase.dia_semana} a las ${clase.hora}?`,
-        buttons: [
-          { text: 'Cancelar', role: 'cancel' },
-          {
-            text: 'Eliminar',
-            handler: () => {
-              this.service
-                .eliminar(clase.id_class)
-                .subscribe(() => this.loadData());
-            },
+  this.alertCtrl
+    .create({
+      header: 'Confirmar',
+      message: `¿Eliminar clase del ${clase.dia_semana} a las ${clase.hora}?`,
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.service.eliminar(clase.id_class).subscribe(() => {
+              this.mostrarMensajeExito('Clase eliminada correctamente.');
+              this.loadData();
+            });
           },
-        ],
-      })
-      .then((alert) => alert.present());
-  }
+        },
+      ],
+    })
+    .then((alert) => alert.present());
+}
 
   submit() {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
 
-    const data = this.form.value as ScheduledClass;
+  const data = this.form.value as ScheduledClass;
 
-    if (this.isEditing) {
-      this.service.modificar(data).subscribe(() => this.finish());
-    } else {
-      this.service.agregar(data).subscribe(() => this.finish());
-    }
+  if (this.isEditing) {
+    this.service.modificar(data).subscribe(() => {
+      this.mostrarMensajeExito('Clase actualizada correctamente.');
+      this.finish();
+    });
+  } else {
+    this.service.agregar(data).subscribe(() => {
+      this.mostrarMensajeExito('Clase agregada correctamente.');
+      this.finish();
+    });
   }
+}
 
   private finish() {
     this.loadData();
@@ -188,6 +197,24 @@ onHoraChange(event: any) {
     this.form.markAsDirty();
     this.mostrarSelectorHora = false; // Cierra el modal
   }
+}
+
+private mostrarMensajeExito(mensaje: string) {
+  this.toastCtrl.create({
+    message: mensaje,
+    duration: 2000,
+    position: 'top',
+    color: 'success' // También puedes usar 'warning', 'danger' según el caso
+  }).then(toast => toast.present());
+}
+
+private mostrarMensajeError(mensaje: string) {
+  this.toastCtrl.create({
+    message: mensaje,
+    duration: 2500,
+    position: 'top',
+    color: 'danger'
+  }).then(toast => toast.present());
 }
 
 

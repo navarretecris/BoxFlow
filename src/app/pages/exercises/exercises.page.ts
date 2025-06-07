@@ -48,8 +48,13 @@ articulos: any[] = [];
     this.cargarArticulos();
   }
 
+  ionViewDidEnter() {
+  this.cargarArticulos();
+}
+
   cargarArticulos() {
     this.isLoading = true;
+    this.exercisesService.resetPaginacion(); 
     this.exercisesService.recuperarTodos().subscribe({
       next: (res: any) => {
         this.articulos = res;

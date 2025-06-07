@@ -80,4 +80,9 @@ obtenerTipos() {
   return this.http.post(`${this.url}`, { accion: 'listarTipos' });
 }
 
+resetPaginacion() {
+  this.currentPage = 0;
+}
+
+
 }

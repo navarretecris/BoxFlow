@@ -1,49 +1,65 @@
 <ion-menu *ngIf="user" contentId="main-content" type="overlay">
   <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title>BoxFlow</ion-title>
+    <ion-toolbar color="dark" class="logo-toolbar">
+      <div class="logo-container">
+        <img src="assets/icon/logo2.png" alt="Logo" class="logo-img-centered" />
+      </div>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="menu-wrapper">
-  <div class="menu-header">
-    <img [src]="user?.profile_picture" alt="Foto de perfil" class="menu-photo" />
-    <h2 class="menu-username">{{ user?.full_name }}</h2>
-    <p class="menu-email">{{ user?.email }}</p>
-  </div>
+    <div class="menu-header">
+      <img
+        [src]="user?.profile_picture"
+        alt="Foto de perfil"
+        style="
+          border-radius: 50%;
+          width: 64px;
+          height: 64px;
+          object-fit: cover;
+          display: block;
+          margin: 0 auto 10px auto;
+          border: 2px solid white;
+        "
+      />
+      <h2 class="menu-username">{{ user?.full_name }}</h2>
+      <p class="menu-email">{{ user?.email }}</p>
+    </div>
 
-  <ion-list class="menu-list">
-    <ion-item (click)="goToHome()">
-      <ion-icon name="home-outline" slot="start"></ion-icon>
-      <ion-label>Inicio</ion-label>
-    </ion-item>
-    
-    <ion-item routerLink="/reservas" routerDirection="forward">
-      <ion-icon name="calendar-outline" slot="start"></ion-icon>
-      <ion-label>Mis reservas</ion-label>
-    </ion-item>
-    <ion-item (click)="goToClasses()">
-      <ion-icon name="accessibility-outline" slot="start"></ion-icon>
-      <ion-label>Clases</ion-label>
-    </ion-item>
-    <ion-item (click)="goToSchedule()">
-      <ion-icon name="calendar-number-outline" slot="start"></ion-icon>
-      <ion-label>Clases programadas</ion-label>
-    </ion-item>
-    <ion-item (click)="goToExercises()">
-      <ion-icon name="barbell-outline" slot="start"></ion-icon>
-      <ion-label>Ejercicios</ion-label>
-    </ion-item>
-    <ion-item (click)="logout()">
-      <ion-icon name="log-out-outline" slot="start"></ion-icon>
-      <ion-label>Cerrar sesión</ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-list class="menu-list">
+      <ion-item (click)="goToHome()">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-item>
 
-  <div class="menu-footer">
-    <h6 class="menu-version">BoxFlow Pro v1.0</h6>
-  </div>
-</ion-content>
+      <ion-item routerLink="/reservas" routerDirection="forward">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>Mis reservas</ion-label>
+      </ion-item>
+      <ion-item (click)="goToClasses()">
+        <ion-icon name="accessibility-outline" slot="start"></ion-icon>
+        <ion-label>Clases</ion-label>
+      </ion-item>
+      <ion-item (click)="goToSchedule()">
+        <ion-icon name="calendar-number-outline" slot="start"></ion-icon>
+        <ion-label>Clases programadas</ion-label>
+      </ion-item>
+      <ion-item (click)="goToExercises()">
+        <ion-icon name="barbell-outline" slot="start"></ion-icon>
+        <ion-label>Ejercicios</ion-label>
+      </ion-item>
+      <ion-item (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Cerrar sesión</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="menu-footer">
+      
+      <img src="assets/icon/logo2.png" alt="Logo footer" class="footer-logo" />
+      <h6 class="menu-version">BoxFlow Pro v1.0</h6>
+    </div>
+  </ion-content>
 </ion-menu>
 
 <ion-router-outlet id="main-content"></ion-router-outlet>

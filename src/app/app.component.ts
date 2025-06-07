@@ -14,7 +14,9 @@ import {
   NavController,
   IonFooter,
   MenuController,
-  IonItemDivider
+  IonItemDivider,
+  IonAvatar,
+  IonButtons
 } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,6 +25,7 @@ import { AuthService } from './services/auth.service'; // ✅ Importa tu servici
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -39,7 +42,9 @@ import { AuthService } from './services/auth.service'; // ✅ Importa tu servici
     IonList,
     IonItem,
     IonFooter,
-    IonItemDivider
+    IonItemDivider,
+    IonAvatar,
+    IonButtons
   ],
 })
 export class AppComponent implements OnInit {

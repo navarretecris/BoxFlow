@@ -100,7 +100,7 @@ async mostrarToast(mensaje: string, color: string = 'success') {
   const toast = await this.toastController.create({
     message: mensaje,
     duration: 2000,
-    position: 'bottom',
+    position: 'top',
     color: color
   });
   await toast.present();
